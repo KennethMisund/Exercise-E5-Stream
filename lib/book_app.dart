@@ -1,4 +1,5 @@
 import 'package:exercise_e5/infrastructure/book_repository.dart';
+import 'package:exercise_e5/solutions.dart';
 import 'package:flutter/material.dart';
 
 import 'infrastructure/book.dart';
@@ -23,10 +24,19 @@ class BookApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              BookItem(spectorBook),
-              BookItem(spectorBook),
-              BookItem(spectorBook),
-              BookItem(spectorBook)
+              StreamBuilder<List<Book>>(
+                stream: BookRepository.getInstance().fetchAllBooksAsAList(),
+                builder: (context, snapshot) {
+                  if(!snapshot.hasData) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: snapshot.data!
+                      .map<Widget>((Book book) => BookItem(book)).toList(),
+                  );
+                },
+              ),
             ],
           ),
         ),
