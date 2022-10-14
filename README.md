@@ -72,14 +72,14 @@ and `await`. Several steps in this part:
     * You can call the function `sleepSeconds()` which is already provided in the template
       code (`infrastructure/sleep.dart`).
     * If you have done it correctly, you should get the first test
-      pass: `flutter test test/step_1_1_test.dart`
+      pass: `flutter test test/step_1_1_test.dart` X
 * Step 2: Implement an _asynchronous_ function `sleepMilliseconds(milliseconds)` which sleeps (in an
   asynchronous manner) the desired amount of milliseconds. Take a look at `sleepSeconds` function,
   get inspiration from it. Hints:
-  The function must return `Future<void>`.
+  The function must return `Future<void>`. X
 * Step 3: Implement an _asynchronous_ function `Future<int> readTemperature() async` which simulates
   reading of a temperature sensor and returns the value `23` after 200 milliseconds. I.e., it _
-  sleeps_ for 200ms, then returns `23`.
+  sleeps_ for 200ms, then returns `23`. X
 
 ### Part 2
 
@@ -92,10 +92,12 @@ singleton class. Your task is to create the `BookService` class with the followi
 
 * Step 1: `BookService` must implement singleton patter: it must have a static
   function `getInstance()` which returns the singleton instance of the class. If you did it
-  correctly, you should be able to pass the test `flutter test test/step_2_1.test`.
+  correctly, you should be able to pass the test `flutter test test/step_2_1.test`. X
+
 * Step 2: Implement asynchronous method in the `BookService` class: `Stream<Book> getBooks`. It must
   return a stream where _books are received from the database_ (this is a simulation). Hint: you can
-  simply return the stream you get from `BookRepository.fetchAllBooks`.
+  simply return the stream you get from `BookRepository.fetchAllBooks`. X
+
 * Step 3: In this step you need to do a transformation on a stream. The stream in Step 2 simply
   returns all the books. In this task you need to return titles for each of the books. I.e.,
   implement a `BookService`
@@ -103,7 +105,8 @@ singleton class. Your task is to create the `BookService` class with the followi
     * You can either use the `map` operator on the stream or `await for` loop with `yield`. If you
       use the second option, remember to have `async*` modifier for the function.
     * See the tests in `step_2_3_test.dart` if you are in doubt on how the function will be used and
-      what the signature must be.
+      what the signature must be. X
+  
 * Step 4: Implement an _asynchronous_ `BookService`
   method `Stream<Book> searchByTitle(String searchString)` which returns a Book stream - only the
   books whose titles include the given search string (_case-sensitive_ search). See the tests
@@ -111,7 +114,8 @@ singleton class. Your task is to create the `BookService` class with the followi
   the `await for` with `yield`
   or use the filtering function `where` on the original stream (see
   the [docs for stream modification functions](https://dart.dev/tutorials/language/streams#modify-stream-methods))
-  .
+  .  X
+
 * Step 5: BONUS exercise for curious students! Have you wondered whether it is possible to call
   asynchronous functions inside a synchronous
   function? [It is actually possible](https://stackoverflow.com/a/41401506/1703497)! The code

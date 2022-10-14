@@ -21,23 +21,19 @@ class BookApp extends StatelessWidget {
         appBar: AppBar(title: Text("Book app")),
         body: Padding(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              StreamBuilder<List<Book>>(
-                stream: BookRepository.getInstance().fetchAllBooksAsAList(),
-                builder: (context, snapshot) {
-                  if(!snapshot.hasData) {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: snapshot.data!
-                      .map<Widget>((Book book) => BookItem(book)).toList(),
-                  );
-                },
-              ),
-            ],
+          child: StreamBuilder<List<Book>>(
+            stream: BookRepository.getInstance().fetchAllBooksAsAList(),
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Center(child: CircularProgressIndicator());
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: snapshot.data!
+                    .map<Widget>((Book book) => BookItem(book))
+                    .toList(),
+              );
+            },
           ),
         ),
       ),
